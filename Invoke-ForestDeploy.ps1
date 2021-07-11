@@ -50,3 +50,4 @@ function Invoke-ForestDeploy {
 ShowBanner
 addsInstall
 forestDeploy
+Restart-Computer
