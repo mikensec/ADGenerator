@@ -1,3 +1,5 @@
+$DomainName = "mayorsec.local"
+
 function ShowBanner {
     $banner  = @()
     $banner+= $Global:Spacing + ''
@@ -324,6 +326,9 @@ function Invoke-ADGenerator {
 	[System.String]
 	$DomainName
 )
+
+}
+
 ShowBanner
 $Global:Domain = $DomainName
 promoteUser
@@ -347,4 +352,3 @@ Write-Good "Domain-wide PowerShell Remoting GPO configuration completed."
 Write-Good "Some changes require a restart to take effect. Restarting your domain controller in 30 seconds."
 Start-Sleep -Seconds 30
 Restart-Computer
-}
