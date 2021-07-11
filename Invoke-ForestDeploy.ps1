@@ -1,3 +1,5 @@
+$DomainName = "mayorsec.local"
+
 function ShowBanner {
     $banner  = @()
     $banner+= $Global:Spacing + ''
@@ -42,7 +44,9 @@ function Invoke-ForestDeploy {
 	[System.String]
 	$DomainName
 )
+
+}
+
 ShowBanner
 addsInstall
 forestDeploy
-}
