@@ -49,7 +49,21 @@ function Invoke-ForestDeploy {
 
 }
 
+function promoteUser {
+$username = ((gwmi win32_computersystem).username).split('\')[1]
+Write-Good "Promoting $username to appropriate Domain Administrative roles required for the course."
+Write-Info "Promoting $username to Enterprise Administrator."
+net group "Enterprise Admins" $username /add /domain
+Write-Info "Promoting $username to Domain Administrator."
+net group "Domain Admins" $username /add /domain
+Write-Info "Promoting $username to Group Policy Creator Owners."
+net group "Group Policy Creator Owners" $username /add /domain
+Write-Info "Promoting $username to Local Administrator (error output may occur - this is expected)."
+net localgroup "administrators" $username /add
+}
+
+
 ShowBanner
 addsInstall
 forestDeploy
-Write-Info "`n`nRestart the controller if not instructed."
+promoteUser
