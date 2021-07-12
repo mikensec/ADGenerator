@@ -1,4 +1,6 @@
 $DomainName = "mayorsec.local"
+$SecureStringPw = (ConvertTo-SecureString -String "Password123!" -asplaintext -Force)
+Write-Host $SecureStringPw
 
 function ShowBanner {
     $banner  = @()
@@ -31,9 +33,9 @@ Write-Info "`n`nToolset installed.`n`n"
 }
 
 function forestDeploy {
-Write-Good "Generating the domain. Make note of the domain name for the ADGenerator Script to be ran after the controller is built."
+Write-Good "Generating the domain.Using mayorsec.local and Password123! for safemode password."
 $DomainNetBiosName = $DomainName.split('.')[0]
-Install-ADDSForest -DomainName $DomainName -DomainNetBiosName $DomainNetBiosName -InstallDNS:$true
+Install-ADDSForest -DomainName $DomainName -DomainNetBiosName $DomainNetBiosName -InstallDNS:$true -SafeModeAdministratorPassword $SecureStringPw
 Write-Info "`n`nRestart the controller if not instructed."
 }
 
@@ -50,4 +52,4 @@ function Invoke-ForestDeploy {
 ShowBanner
 addsInstall
 forestDeploy
-Restart-Computer
+Write-Info "`n`nRestart the controller if not instructed."
