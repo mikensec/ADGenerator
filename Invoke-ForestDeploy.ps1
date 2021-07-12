@@ -36,7 +36,7 @@ function forestDeploy {
 Write-Good "Generating the domain.Using mayorsec.local and Password123! for safemode password."
 $DomainNetBiosName = $DomainName.split('.')[0]
 Install-ADDSForest -DomainName $DomainName -DomainNetBiosName $DomainNetBiosName -InstallDNS:$true -SafeModeAdministratorPassword $SecureStringPw -Force
-Write-Info "`n`nComputer will restart, please wait!."
+Write-Info "`n`nDone with forestDeploy, please wait!."
 }
 
 function Invoke-ForestDeploy {
